@@ -4,7 +4,6 @@
     background-color: #032b42;
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 8px;
 }
 
 .login-page {
@@ -14,7 +13,7 @@
 }
 
 .auth-form {
-    position: relative;
+    position: center;
     z-index: 1;
     background: #256991;
     max-width: 360px;
