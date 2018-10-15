@@ -37,45 +37,53 @@
             <a id="store" class="fa fa-home">Store</a>
             <a id="admin" class="fa fa-wrench">Admin</a>
         </div>
-        <h1>Hefe</h1>
-        <div class="auth-form">
-            <form class="products-form" action="" method="GET">
-                <fieldset>
-                    <legend> Available Products:</legend>
-                    <input type="text" placeholder="Search Here" />
-                    <label>Select Product Category : </label>
-                    <select name="category">
-                        <option>Household </option>
-                        <option>Kitchen & Cookery</option>
-                        <option>Electronics</option>
-                        <option>Entertainment</option>
-                    </select>
-                </fieldset>
-                <button>SEARCH</button>
-            </form>
-        </div>
-        <div class="shopping cart-form">
-            <form class="login-form" action="" method="POST">
-                <fieldset>
-                    <legend> Customer Cart:</legend>
-                    <input type="text" placeholder="username" />
-                    <label>Select Product Category : </label>
-                    <select name="category">
-                        <option>Household </option>
-                        <option>Kitchen & Cookery</option>
-                        <option>Electronics</option>
-                        <option>Entertainment</option>
-                    </select>
-                    <label>Insert Product image : </label>
-                    <input type="file" name="product-image">
-
-                    <input type="submit" value="Submit my information form">
-                    <input type="reset" value="reset">
-
-                </fieldset>
-                <button>login</button>
-            </form>
-        </div>
+        <h1>Available Products</h1>
+        <table>
+            <thead>
+                <tr class="available-products-table-head">
+                    <th class="column1">Product_ID</th>
+                    <th class="column2">Category</th>
+                    <th class="column3">Name</th>
+                    <th class="column4">Price(Ksh)</th>
+                    <th class="column5">Stock</th>
+                    <th class="column6">Make Order</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="column1">01</td>
+                    <td class="column2">Electronics </td>
+                    <td class="column3">iPhone X 64Gb Grey</td>
+                    <td class="column4"> 99,999.00</td>
+                    <td class="column5">11</td>
+                    <td class="column6"><a href="" class="table-btn"> SALE</a></td>
+                </tr>
+                <tr>
+                    <td class="column1">02</td>
+                    <td class="column2">Phone</td>
+                    <td class="column3">Samsung S8 Black</td>
+                    <td class="column4">75,600.00</td>
+                    <td class="column5">13</td>
+                    <td class="column6"><a href="" class="table-btn"> SALE</a></td>
+                </tr>
+                <tr>
+                    <td class="column1">03</td>
+                    <td class="column2">Kitchen</td>
+                    <td class="column3">Brhum Refrigerator</td>
+                    <td class="column4"> 55,200.00</td>
+                    <td class="column5">12</td>
+                    <td class="column6"><a href="" class="table-btn"> SALE</a></td>
+                </tr>
+                <tr>
+                    <td class="column1">04</td>
+                    <td class="column2">Kitchen</td>
+                    <td class="column3">Hotpoint 4 burner Cooker</td>
+                    <td class="column4">44,000.00</td>
+                    <td class="column5">23</td>
+                    <td class="column6"><a href="" class="table-btn"> SALE</a></td>
+                </tr>
+            </tbody>
+        </table>
     </section>
     <script>
         function openNav() {
