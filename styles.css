@@ -413,3 +413,13 @@ tbody tr:hover {
     padding-right: 15px;
   }
 }
+
+/*shopping cart */
+.quantity-field {
+  background-color: #ccc;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  font-size: 1rem;
+  padding: 2px;
+  width: 3.75rem;
+}
