@@ -94,6 +94,7 @@ header #logo {
 header #logo h1 {
   margin: 0 10px;
 }
+
 header #menu-btn {
   margin: 0 30px;
   color: #e8491d;
@@ -170,6 +171,7 @@ header .active a {
   .side-navbar {
     padding-top: 15px;
   }
+
   .side-navbar a {
     font-size: 18px;
   }
@@ -184,6 +186,7 @@ header .active a {
   justify-content: center;
   overflow: hidden;
   height: 100%;
+
 }
 
 footer {
@@ -196,51 +199,67 @@ footer {
 fieldset {
   margin: 40px auto;
 }
+
 /*available products*/
+.table-view {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
 table {
   border-spacing: 1;
   border-collapse: collapse;
   background: white;
   border-radius: 10px;
   overflow: hidden;
-  width: 75%;
+  width: 90%;
   margin: 0 auto;
   position: center;
   margin-bottom: 10%;
 }
+
 table * {
   position: relative;
 }
+
 table td,
 table th {
   padding-left: 8px;
 }
+
 table thead tr {
   height: 60px;
   background: #032b42;
 }
+
 table tbody tr {
   height: 50px;
 }
+
 table tbody tr:last-child {
   border: 0;
 }
+
 table td,
 table th {
   text-align: left;
 }
+
 table td.l,
 table th.l {
   text-align: right;
 }
+
 table td.c,
 table th.c {
   text-align: center;
 }
+
 table td.r,
 table th.r {
   text-align: center;
 }
+
 .available-products-table-head th {
   font-size: 20px;
   color: #fff;
@@ -300,26 +319,32 @@ tbody tr:hover {
   table {
     display: block;
   }
-  table > *,
+
+  table>*,
   table tr,
   table td,
   table th {
     display: block;
   }
+
   table thead {
     display: none;
   }
+
   table tbody tr {
     height: auto;
     padding: 37px 0;
   }
+
   table tbody tr td {
     padding-left: 40% !important;
     margin-bottom: 24px;
   }
+
   table tbody tr td:last-child {
     margin-bottom: 0;
   }
+
   table tbody tr td:before {
     font-family: OpenSans-Regular;
     font-size: 14px;
@@ -331,21 +356,27 @@ tbody tr:hover {
     left: 30px;
     top: 0;
   }
+
   table tbody tr td:nth-child(1):before {
     content: 'Product_ID';
   }
+
   table tbody tr td:nth-child(2):before {
     content: 'Category';
   }
+
   table tbody tr td:nth-child(3):before {
     content: 'Name';
   }
+
   table tbody tr td:nth-child(4):before {
     content: 'Price';
   }
+
   table tbody tr td:nth-child(5):before {
     content: 'Stock';
   }
+
   table tbody tr td:nth-child(6):before {
     content: 'Make Order';
   }
@@ -369,6 +400,7 @@ tbody tr:hover {
     font-size: 14px;
   }
 }
+
 .table-btn {
   background: #5aa8f3;
   padding: 4px;
