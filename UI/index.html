@@ -6,10 +6,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Owezzy Stores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./styles.css" />
+    <script src="./js/main.js.js"></script>
+
 </head>
 
 <body>
+    <header>
+        <div id="logo">
+            <h1>
+                <span class="highlight">owezzy store</span>
+            </h1>
+            <span id="menu-btn" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+        </div>
+        <nav class="main-nav">
+            <ul class="main-nav-items">
+                <li class="main-nav__item main-nav__item--cta">
+                    <a href="./login.html">Logout</a>
+                </li>
 
+            </ul>
+        </nav>
+    </header>
+    <section id="showcase-main">
+        <div class="side-navbar" id="side-menu">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a id="store" class="fa fa-home active" href="./index.html">Store</a>
+            <a id="dashboard" class="fa fa-bar-chart">Dashboard</a>
+            <a id="sales" class="fa fa-money">Sales</a>
+            <a id="admin" class="fa fa-wrench">Admin</a>
+        </div>
+        <div class="table-view">
+            <div>
+                <h1>Available Products</h1>
+                <table>
+                    <thead>
+                        <tr class="available-products-table-head">
+                            <th class="column1">ID</th>
+                            <th class="column2">Category</th>
+                            <th class="column3">Name</th>
+                            <th class="column4">Price(Ksh)</th>
+                            <th class="column5">Stock</th>
+                            <th class="column6">Make a Sale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="column1">01</td>
+                            <td class="column2">Electronics </td>
+                            <td class="column3">iPhone X 64Gb Grey</td>
+                            <td class="column4"> 99,999.00</td>
+                            <td class="column5">11</td>
+                            <td class="column6"><a href="" class="table-btn"> SALE</a></td>
+                        </tr>
+                        <tr>
+                            <td class="column1">02</td>
+                            <td class="column2">Phone</td>
+                            <td class="column3">Samsung S8 Black</td>
+                            <td class="column4">75,600.00</td>
+                            <td class="column5">13</td>
+                            <td class="column6"><a href="" class="table-btn"> SALE</a></td>
+                        </tr>
+                        <tr>
+                            <td class="column1">03</td>
+                            <td class="column2">Kitchen</td>
+                            <td class="column3">Brhum Refrigerator</td>
+                            <td class="column4"> 55,200.00</td>
+                            <td class="column5">12</td>
+                            <td class="column6"><a href="" class="table-btn"> SALE</a></td>
+                        </tr>
+                        <tr>
+                            <td class="column1">04</td>
+                            <td class="column2">Kitchen</td>
+                            <td class="column3">Hotpoint 4 burner Cooker</td>
+                            <td class="column4">44,000.00</td>
+                            <td class="column5">23</td>
+                            <td class="column6"><a href="" class="table-btn"> SALE</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--shpooing cart-->
+            <div>
+                <h1>Shopping Cart</h1>
+                <table>
+                    <thead>
+                        <tr class="available-products-table-head">
+                            <th class="column1">Quantity</th>
+                            <th class="column3">Name</th>
+
+                            <th class="column4">Cost(Ksh)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="column1"><input value="2" min="1" class="quantity-field" type="number"></td>
+                            <td class="column3">iPhone X 64Gb Grey</td>
+                            <td class="column4"> 99,999.00</td>
+                        </tr>
+                        <tr>
+                            <td class="column1"><input value="2" min="1" class="quantity-field" type="number"></td>
+                            <td class="column3">Samsung S8 Black</td>
+                            <td class="column4">75,600.00</td>
+                        </tr>
+                        <tr>
+                            <td class="column1"><input value="1" min="1" class="quantity-field" type="number"></td>
+                            <td class="column3">Brhum Refrigerator</td>
+                            <td class="column4"> 55,200.00</td>
+                        </tr>
+                        <tr>
+                            <td class="column1"><input value="1" min="1" class="quantity-field" type="number"></td>
+                            <td class="column3">Hotpoint 4 burner Cooker</td>
+                            <td class="column4">44,000.00</td>
+                        </tr>
+                        <tr>
+                            <td class="column1"><a href="" class="table-btn"> CHECKOUT</a></td>
+                            <td class="column4">TOTAL: </td>
+                            <td class="column4">244,000.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <script>
+        function openNav() {
+            document.getElementById("side-menu").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("side-menu").style.width = "0";
+        }
+    </script>
 </body>
+<footer>
+    <p>
+        <a href="https://owezzy.github.io" target="_blank">Owezzy</a> 2018&copy;</p>
+</footer>
 
 </html>
