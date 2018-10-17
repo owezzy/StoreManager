@@ -193,6 +193,7 @@ fieldset {
   display: grid;
   grid-template-columns: 2fr 1fr;
 }
+
 .table-view-1 {
   display: block;
   width: 90%;
@@ -203,6 +204,7 @@ fieldset {
   float: right;
   width: 55%;
 }
+
 table {
   border-spacing: 1;
   border-collapse: collapse;
@@ -304,10 +306,12 @@ tbody tr:hover {
   width: 100px;
   text-align: right;
 }
+
 .table-view-1 .column4 {
   width: 100px;
   text-align: center;
 }
+
 .column6 {
   width: 150px;
   text-align: right;
@@ -320,7 +324,7 @@ tbody tr:hover {
     display: block;
   }
 
-  table > *,
+  table>*,
   table tr,
   table td,
   table th {
@@ -461,4 +465,24 @@ tbody tr:hover {
 .cover {
   position: absolute;
   margin-inline-start: 20px;
+}
+
+.cards {
+  display: block;
+  margin-left: 10%;
+}
+
+.card {
+  padding: 1rem;
+  width: 13rem;
+  height: 5rem;
+  margin: 1.5rem;
+  background: white;
+  box-shadow: 0 0 6px 2px #5aa8fc;
+  transition: all .2s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.card:hover {
+  border-bottom: 2px solid #032b42
 }
