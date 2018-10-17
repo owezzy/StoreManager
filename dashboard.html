@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./styles.css" />
+    <script src="./js/main.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+            <h1>
+                <span class="highlight">owezzy store</span>
+            </h1>
+            <span id="menu-btn" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+        </div>
+        <nav class="main-nav">
+            <ul class="main-nav-items">
+                <li class="main-nav__item main-nav__item--cta">
+                    <a href="./login.html">Logout</a>
+                </li>
+
+            </ul>
+        </nav>
+    </header>
+    <section id="showcase-main">
+
+        <div class="side-navbar" id="side-menu">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a id="store" class="fa fa-home active" href="./index.html">Store</a>
+            <a id="dashboard" class="fa fa-bar-chart" href="./dashboard.html">Dashboard</a>
+            <a id="sales" class="fa fa-money" href="./sales.html">Sales</a>
+            <a id="admin" class="fa fa-wrench">Admin</a>
+        </div>
+        <div class="cards">
+            <div class="card">
+                <h3>TOTAL SALES(Ksh)</h3>
+                <h4 id="totalCost">130,800.00</h4>
+            </div>
+        </div>
+        <div>
+            <h1>My Sales Records</h1>
+        </div>
+        <div class="table-view-1">
+
+
+            <table id="salesTable">
+                <thead>
+                    <tr class="available-products-table-head">
+                        <th class="column1">Date</th>
+                        <th class="column2">Order_ID</th>
+                        <th class="column2">Category</th>
+                        <th class="column3">Product_Name</th>
+                        <th class="column3">Attendant Name</th>
+                        <th class="column4">Cost(Ksh)</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="column1">2018-10-16 16:22</td>
+                        <td class="column2">02</td>
+                        <td class="column2">Phone</td>
+                        <td class="column3">iPhone X 64Gb Grey</td>
+                        <td class="column3">Owen Adira</td>
+                        <td class="column4">75,600.00</td>
+                    </tr>
+                    <tr>
+                        <td class="column1">2018-10-16 10:22</td>
+                        <td class="column2">03</td>
+                        <td class="column2">Kitchen</td>
+                        <td class="column3">Brhum Refrigerator</td>
+                        <td class="column3">Owen Adira</td>
+                        <td class="column4"> 55,200.00</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+<footer>
+    <p>
+        <a href="https://owezzy.github.io" target="_blank">Owezzy</a> 2018&copy;</p>
+</footer>
+
+</html>
