@@ -464,3 +464,23 @@ tbody tr:hover {
   position: absolute;
   margin-inline-start: 20px;
 }
+
+.cards {
+  display: block;
+  margin-left: 3em;
+}
+
+.card {
+  padding: 1rem;
+  width: 13rem;
+  height: 5rem;
+  margin: 1.5rem;
+  background: white;
+  box-shadow: 0 0 6px 2px #5aa8fc;
+  transition: all .2s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.card:hover {
+  border-bottom: 2px solid #032b42
+}
