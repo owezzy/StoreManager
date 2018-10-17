@@ -52,6 +52,7 @@ body {
   margin: 0;
   background-color: #f4f4f4f4;
   box-sizing: border-box;
+
 }
 
 header {
@@ -175,6 +176,11 @@ header .active a {
   justify-content: center;
   overflow: hidden;
   height: 100%;
+
+}
+
+a:link {
+  text-decoration: none;
 }
 
 footer {
@@ -193,16 +199,7 @@ fieldset {
   display: grid;
   grid-template-columns: 2fr 1fr;
 }
-.table-view-1 {
-  display: block;
-  width: 90%;
-  align-self: center;
-}
 
-.title {
-  float: right;
-  width: 55%;
-}
 table {
   border-spacing: 1;
   border-collapse: collapse;
@@ -283,8 +280,8 @@ tbody tr:hover {
 }
 
 .column1 {
-  width: 160px;
-  padding-left: 20px;
+  width: 260px;
+  padding-left: 40px;
 }
 
 .column2 {
@@ -297,19 +294,16 @@ tbody tr:hover {
 
 .column4 {
   width: 110px;
-  text-align: center;
+  text-align: right;
 }
 
 .column5 {
-  width: 100px;
+  width: 170px;
   text-align: right;
 }
-.table-view-1 .column4 {
-  width: 100px;
-  text-align: center;
-}
+
 .column6 {
-  width: 150px;
+  width: 222px;
   text-align: right;
   padding-right: 62px;
   color: #4caf50;
@@ -320,7 +314,7 @@ tbody tr:hover {
     display: block;
   }
 
-  table > *,
+  table>*,
   table tr,
   table td,
   table th {
@@ -407,6 +401,13 @@ tbody tr:hover {
   border-radius: 10px;
 }
 
+.table-btn2 {
+  background: #e8491d;
+  padding: 4px;
+  border-radius: 10px;
+  color: #ffffff
+}
+
 @media (max-width: 576px) {
   .container-table100 {
     padding-left: 15px;
@@ -434,6 +435,7 @@ tbody tr:hover {
   float: left;
   width: 100%;
   border: 3px solid #032b42;
+  ;
   padding: 5px;
   height: 20px;
   border-radius: 5px;
@@ -441,7 +443,7 @@ tbody tr:hover {
 }
 
 .searchTerm:focus {
-  color: #00b4cc;
+  color: #00B4CC;
 }
 
 .searchButton {
@@ -461,4 +463,5 @@ tbody tr:hover {
 .cover {
   position: absolute;
   margin-inline-start: 20px;
+
 }
