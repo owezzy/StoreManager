@@ -83,3 +83,25 @@ class ProductList(Resource):
         )
         product_manager.add_product(product)
         return product, 201
+
+
+"""sales resource"""
+
+
+# sales manager object
+class SalesManager:
+    last_id = 0
+
+    def __init__(self):
+        self.orders = {}
+
+    def add_order(self, order):
+        self.__class__.last_id += 1
+        order.id = self.__class__.last_id
+        self.orders[self.__class__.last_id] = order
+
+    def get_order(self, id):
+        pass
+
+    def delete_order(self, id):
+        pass
