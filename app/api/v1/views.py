@@ -1,7 +1,6 @@
-from flask import Flask
-from flask_restful import abort, Api, fields, marshal_with, reqparse, Resource
+from flask_restful import abort, fields, marshal_with, reqparse, Resource
 from datetime import datetime
-from models import ProductModel
+from app.api.v1.models import ProductsModel
 from pytz import timezone
 
 
@@ -9,15 +8,18 @@ from pytz import timezone
 def local_timezone_time_stamp():
     tz = timezone('Africa/Nairobi')
     ct = datetime.now(tz=tz)
-    return ct.isoformat()
+    return ct
 
 
-class ProductManager():
+# product manager object
+class ProductManager:
     last_id = 0
 
+# using a dictionary to hold product data
     def __init__(self):
         self.products = {}
 
+# adds a product to the list of products
     def add_product(self, product):
         self.__class__.last_id += 1
         product.id = self.__class__.last_id
@@ -30,9 +32,9 @@ class ProductManager():
         pass
 
 
+# product fields data type definition
 product_fields = {
     'id': fields.Integer,
-    'uri': fields.Url('product_endpoint'),
     'product_name': fields.String,
     'price': fields.Integer,
     'stock': fields.Integer,
@@ -43,22 +45,31 @@ product_fields = {
 product_manager = ProductManager()
 
 
+# object to define products resource
 class Product(Resource):
     @staticmethod
     def abort_if_product_doesnt_exist(id):
         if id not in product_manager.products:
-            abort(message="Message {0} doesn't exist".format(id), http_status_code=404)
+            abort(message="Product {0} doesn't exist".format(id), http_status_code=404)
 
 
+# object which holds the product list
 class ProductList(Resource):
+
+    # fetch all products from list
     @marshal_with(product_fields)
-    def _post(self):
+    def get(self):
+        return [p for p in product_manager.products.values()]
+
+    # add a product to the list
+    @marshal_with(product_fields)
+    def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('product_name', type=str, required=True, help='product_name cannot be empty!')
         parser.add_argument('price', type=int, required=True, help='price cannot be empty!')
         parser.add_argument('stock', type=int, required=True, help='Please specify the quantity!')
         args = parser.parse_args()
-        product = ProductModel(
+        product = ProductsModel(
             product_name=args['product_name'],
             price=args['price'],
             stock=args['stock'],
@@ -66,9 +77,3 @@ class ProductList(Resource):
         )
         product_manager.add_product(product)
         return product, 201
-
-
-app = Flask(__name__)
-api = Api(app)
-api.add_resource(ProductList, '/products/')
-api.add_resource(Product, '/products/<int:id>', endpoint='product_endpoint')
