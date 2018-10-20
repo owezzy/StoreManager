@@ -15,11 +15,11 @@ def local_timezone_time_stamp():
 class ProductManager:
     last_id = 0
 
-# using a dictionary to hold product data
+    # using a dictionary to hold product data
     def __init__(self):
         self.products = {}
 
-# adds a product to the list of products
+    # adds a product to the list of products
     def add_product(self, product):
         self.__class__.last_id += 1
         product.id = self.__class__.last_id
@@ -55,7 +55,7 @@ class Product(Resource):
 
     # fetch a single product
     @marshal_with(product_fields)
-    def get(self,id):
+    def get(self, id):
         self.abort_if_product_doesnt_exist(id)
         return product_manager.get_product(id)
 
@@ -132,6 +132,10 @@ class Order(Resource):
 
 # OrderList object to store the sales order object
 class OrderList(Resource):
+    # get all sales orders
+    @marshal_with(order_fields)
+    def get(self):
+        return [p for p in sales_manager.orders.values()]
 
     # add a single sales order to list
     @marshal_with(order_fields)
