@@ -1,9 +1,8 @@
 class ProductsModel:
-    def __init__(self, product, name, price, stock, creation_date):
+    def __init__(self, product_name, price, stock, creation_date):
         # We will automatically generate the new id
         self.id = 0
-        self.product = product
-        self.Name = name
+        self.product_name = product_name
         self.Price = price
         self.Stock = stock
         self.creation_date = creation_date
