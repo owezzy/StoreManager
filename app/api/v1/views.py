@@ -101,7 +101,7 @@ class SalesManager:
         self.orders[self.__class__.last_id] = order
 
     def get_order(self, id):
-        pass
+        return self.orders[id]
 
     def delete_order(self, id):
         pass
@@ -123,11 +123,17 @@ sales_manager = SalesManager()
 # Oder object to hold sales detail
 class Order(Resource):
     @staticmethod
-    def abort_if_oder_doesnt_exist(id):
+    def abort_if_order_doesnt_exist(id):
         if id not in sales_manager.orders:
             abort(
                 message="Order {0} doesn't exist".format(id),
                 http_status_code=404)
+
+    # fetch a single order
+    @marshal_with(order_fields)
+    def get(self, id):
+        self.abort_if_order_doesnt_exist(id)
+        return sales_manager.get_order(id)
 
 
 # OrderList object to store the sales order object
@@ -135,7 +141,7 @@ class OrderList(Resource):
     # get all sales orders
     @marshal_with(order_fields)
     def get(self):
-        return [p for p in sales_manager.orders.values()]
+        return [o for o in sales_manager.orders.values()]
 
     # add a single sales order to list
     @marshal_with(order_fields)
