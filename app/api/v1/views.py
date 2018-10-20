@@ -26,7 +26,7 @@ class ProductManager:
         self.products[self.__class__.last_id] = product
 
     def get_product(self, id):
-        pass
+        return self.products[id]
 
     def delete_product(self, id):
         pass
@@ -47,10 +47,17 @@ product_manager = ProductManager()
 
 # object to define products resource
 class Product(Resource):
+    # is executed in case of a request for product that doesn't exists.
     @staticmethod
     def abort_if_product_doesnt_exist(id):
         if id not in product_manager.products:
             abort(message="Product {0} doesn't exist".format(id), http_status_code=404)
+
+    # fetch a single product
+    @marshal_with(product_fields)
+    def get(self,id):
+        self.abort_if_product_doesnt_exist(id)
+        return product_manager.get_product(id)
 
 
 # object which holds the product list
