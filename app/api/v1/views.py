@@ -46,9 +46,9 @@ product_fields = {
 # product custom validation
 def input_validate(value, name):
     if isinstance(value, int):
-        raise ValueError("The parameter '{}' cannot be a number".format(name, value))
+        raise ValueError("The parameter '{}' cannot be a number value: {}".format(name, value))
     elif value == "":
-        raise ValueError("product_name cannot be a empty")
+        raise ValueError("The parameter '{}' cannot be a empty value: {}".format(name, value))
     else:
         return value
 
