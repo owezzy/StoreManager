@@ -42,6 +42,17 @@ product_fields = {
 
 }
 
+
+# product custom validation
+def input_validate(value, name):
+    if isinstance(value, int):
+        raise ValueError("The parameter '{}' cannot be a number value: {}".format(name, value))
+    elif value == "":
+        raise ValueError("The parameter '{}' cannot be a empty value: {}".format(name, value))
+    else:
+        return value
+
+
 product_manager = ProductManager()
 
 
@@ -71,9 +82,10 @@ class ProductList(Resource):
     @marshal_with(product_fields)
     def post(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('product_name', type=str, required=True, help='product_name cannot be empty!')
-        parser.add_argument('price', type=int, required=True, help='price cannot be empty!')
-        parser.add_argument('stock', type=int, required=True, help='Please specify the quantity!')
+        parser.add_argument('product_name', type=input_validate, required=True)
+        parser.add_argument('price', type=int, required=True, help='can be a number only!')
+        parser.add_argument('stock', type=int, required=True, help='Please specify a figure!')
+
         args = parser.parse_args()
         product = ProductsModel(
             product_name=args['product_name'],
@@ -112,6 +124,7 @@ order_fields = {
     'id': fields.Integer,
     'product_name': fields.String,
     'attendant_name': fields.String,
+    'customer_name': fields.String,
     'quantity': fields.Integer,
     'cost': fields.Integer,
     'creation_date': fields.DateTime
@@ -147,22 +160,13 @@ class OrderList(Resource):
     @marshal_with(order_fields)
     def post(self):
         parser = reqparse.RequestParser()
+        parser.add_argument('product_name', type=input_validate, required=True)
+        parser.add_argument('customer_name', type=input_validate, required=True)
+        parser.add_argument('attendant_name', type=input_validate, required=True)
         parser.add_argument(
-            'product_name',
-            type=str,
-            required=True,
-            help='product_name cannot be empty!')
+            'cost', type=int, required=True, help='Cost value is not valid!')
         parser.add_argument(
-            'customer_name', type=str, required=True, help='customer_name cannot be empty!')
-        parser.add_argument(
-            'attendant_name',
-            type=str,
-            required=True,
-            help='Please specify the Atendant Name!')
-        parser.add_argument(
-            'cost', type=int, required=True, help='cost cannot be empty!')
-        parser.add_argument(
-            'quantity', type=int, required=True, help='customer_name cannot be empty!')
+            'quantity', type=int, required=True, help='Please specify the quantity!')
 
         args = parser.parse_args()
         order = SalesModel(
