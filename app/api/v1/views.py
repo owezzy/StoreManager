@@ -42,6 +42,17 @@ product_fields = {
 
 }
 
+
+# product custom validation
+def product_name(value):
+    if isinstance(value, int):
+        raise ValueError("product_name cannot be a number")
+    elif value == "":
+        raise ValueError("product_name cannot be a empty")
+    else:
+        return value
+
+
 product_manager = ProductManager()
 
 
@@ -71,9 +82,10 @@ class ProductList(Resource):
     @marshal_with(product_fields)
     def post(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('product_name', type=str, required=True, help='product_name cannot be empty!')
-        parser.add_argument('price', type=int, required=True, help='price cannot be empty!')
-        parser.add_argument('stock', type=int, required=True, help='Please specify the quantity!')
+        parser.add_argument('product_name', type=product_name, required=True)
+        parser.add_argument('price', type=int, required=True, help='can be a number only!')
+        parser.add_argument('stock', type=int, required=True, help='Please specify a specific the quantity!')
+
         args = parser.parse_args()
         product = ProductsModel(
             product_name=args['product_name'],
