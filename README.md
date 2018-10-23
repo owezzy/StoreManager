@@ -3,7 +3,6 @@ Store Manager is a web application that helps store owners manage sales and prod
 records. This application is meant for use in a single store.
 
 ## Built With
-
 - <a href="https://owezzy.github.io/StoreManager/" target="_blank">DEMO </a>
 - [Flask](https://flask.readthedocs.io/en/rtd/) - Used to style HTML pages.
 - [Flask-RESTful](https://flask-restful.readthedocs.io/en/latest/) - Used extend the Flask application.
