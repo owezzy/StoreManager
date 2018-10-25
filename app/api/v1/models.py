@@ -3,8 +3,8 @@ class ProductsModel:
         # We will automatically generate the new id
         self.id = 0
         self.product_name = product_name
-        self.price = price
-        self.stock = stock
+        self.Price = price
+        self.Stock = stock
         self.creation_date = creation_date
 
 
