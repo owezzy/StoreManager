@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/owezzy/StoreManager/badge.svg?branch=develop)](https://coveralls.io/github/owezzy/StoreManager?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/owezzy/StoreManager/badge.svg?branch=ch-test-api-endpoints-161203421)](https://coveralls.io/github/owezzy/StoreManager?branch=ch-test-api-endpoints-161203421)
 
 # StoreManager - API
 Store Manager is a web application that helps store owners manage sales and product inventory
