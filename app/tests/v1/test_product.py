@@ -2,7 +2,7 @@ import unittest
 import json
 import sys
 
-from app import create_app
+from app.app import create_app
 
 POST_PRODUCT_URL = '/api/v1/products'
 GET_A_SINGLE_PRODUCT = '/api/v1/product/1'
