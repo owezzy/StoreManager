@@ -1,14 +1,16 @@
 [![Coverage Status](https://coveralls.io/repos/github/owezzy/StoreManager/badge.svg?branch=ch-test-api-endpoints-161203421)](https://coveralls.io/github/owezzy/StoreManager?branch=ch-test-api-endpoints-161203421)
 
 # StoreManager - API
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e58262b320d743418f09de2743b35ac0)](https://app.codacy.com/app/owezzy/StoreManager?utm_source=github.com&utm_medium=referral&utm_content=owezzy/StoreManager&utm_campaign=Badge_Grade_Dashboard)
+
 Store Manager is a web application that helps store owners manage sales and product inventory
 records. This application is meant for use in a single store.
 
 ##Running a local copy of the Application
 - [Here](https://github.com/owezzy/StoreManager.git) - Clone the repository from link.
-) - Clone the repository from link.
+
 - Navigate to root of your application and run:
- `$ git checkout ft-store-attendant-can-get-a-single-sale-order-161203404 ` to switch to this branch. 
 - Create a virtual environment
  `$ python3 -m venv venv` these creates a python virtual environment called `venv`
 - activate the virtual environment
