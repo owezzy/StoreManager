@@ -1,13 +1,13 @@
-# StoreManager
+# StoreManager - API
 Store Manager is a web application that helps store owners manage sales and product inventory
 records. This application is meant for use in a single store.
 
 ## Built With
 
-- [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5) - Used to build web pages.
-- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - Used to style HTML pages.
-- [JavaScript](https://developer.mozilla.org/bm/docs/Web/JavaScript) - Used to make the HTML pages interactive.
-
+- <a href="https://owezzy.github.io/StoreManager/" target="_blank">DEMO </a>
+- [Flask](https://flask.readthedocs.io/en/rtd/) - Used to style HTML pages.
+- [Flask-RESTful](https://flask-restful.readthedocs.io/en/latest/) - Used extend the Flask application.
+- [marshmallow](https://marshmallow.readthedocs.io/en/3.0/) - Used for Data Serialization and validation. 
 ## Versioning
 
 The project uses [Gitflow](https://datasift.github.io/gitflow/IntroducingGitFlow.html) for versioning.
