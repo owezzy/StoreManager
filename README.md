@@ -3,7 +3,7 @@ Store Manager is a web application that helps store owners manage sales and prod
 records. This application is meant for use in a single store.
 
 ##Running a local copy of the Application
-- [Here](git@github.com:owezzy/StoreManager.git) - Clone the repository from link.
+- [Here](https://github.com/owezzy/StoreManager.git) - Clone the repository from link.
 - Navigate to root of your application and run:
 - Create a virtual environment
  `$ python3 -m venv venv` these creates a python virtual environment called `venv`
