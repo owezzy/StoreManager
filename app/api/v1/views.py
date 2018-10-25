@@ -55,6 +55,10 @@ class Product(Resource):
 
 # object which holds the product list
 class ProductList(Resource):
+    # fetch all products from list
+    @marshal_with(product_fields)
+    def get(self):
+        return [p for p in product_manager.products.values()]
 
     # add a product to the list
     @marshal_with(product_fields)
