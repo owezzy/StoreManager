@@ -1,6 +1,6 @@
 from flask_restful import abort, fields, marshal_with, reqparse, Resource
 from datetime import datetime
-from app.api.v1.models import ProductsModel
+from app.api.v1.models import ProductsModel, SalesModel
 from pytz import timezone
 
 
@@ -83,3 +83,84 @@ class ProductList(Resource):
         )
         product_manager.add_product(product)
         return product, 201
+
+
+"""sales resource"""
+
+
+# sales manager object
+class SalesManager:
+    last_id = 0
+
+    def __init__(self):
+        self.orders = {}
+
+    def add_order(self, order):
+        self.__class__.last_id += 1
+        order.id = self.__class__.last_id
+        self.orders[self.__class__.last_id] = order
+
+    def get_order(self, id):
+        pass
+
+    def delete_order(self, id):
+        pass
+
+
+# orders payload fields data types
+order_fields = {
+    'id': fields.Integer,
+    'product_name': fields.String,
+    'attendant_name': fields.String,
+    'quantity': fields.Integer,
+    'cost': fields.Integer,
+    'creation_date': fields.DateTime
+}
+
+sales_manager = SalesManager()
+
+
+# Oder object to hold sales detail
+class Order(Resource):
+    @staticmethod
+    def abort_if_oder_doesnt_exist(id):
+        if id not in sales_manager.orders:
+            abort(
+                message="Order {0} doesn't exist".format(id),
+                http_status_code=404)
+
+
+# OrderList object to store the sales order object
+class OrderList(Resource):
+
+    # add a single sales order to list
+    @marshal_with(order_fields)
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument(
+            'product_name',
+            type=str,
+            required=True,
+            help='product_name cannot be empty!')
+        parser.add_argument(
+            'customer_name', type=str, required=True, help='customer_name cannot be empty!')
+        parser.add_argument(
+            'attendant_name',
+            type=str,
+            required=True,
+            help='Please specify the Atendant Name!')
+        parser.add_argument(
+            'cost', type=int, required=True, help='cost cannot be empty!')
+        parser.add_argument(
+            'quantity', type=int, required=True, help='customer_name cannot be empty!')
+
+        args = parser.parse_args()
+        order = SalesModel(
+            product_name=args['product_name'],
+            customer_name=args['customer_name'],
+            attendant_name=args['attendant_name'],
+            cost=args['cost'],
+            quantity=args['quantity'],
+            creation_date=local_timezone_time_stamp())
+        sales_manager.add_order(order)
+        return order, 201
