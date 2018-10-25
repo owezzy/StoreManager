@@ -33,7 +33,7 @@ records. This application is meant for use in a single store.
 
 ## RUN TEST
 To run the tests, in your terminal from the root folder run
-``` $ pytest ```
+``` $ python -m pytest --cov=app/tests/v1  ```
 ## Built With
 - <a href="https://owezzy.github.io/StoreManager/" target="_blank">DEMO </a>
 - [Flask](https://flask.readthedocs.io/en/rtd/) - Used to style HTML pages.
