@@ -5,7 +5,8 @@ Store Manager is a web application that helps store owners manage sales and prod
 records. This application is meant for use in a single store.
 
 ##Running a local copy of the Application
-- [Here](git@github.com:owezzy/StoreManager.git) - Clone the repository from link.
+- [Here](https://github.com/owezzy/StoreManager.git) - Clone the repository from link.
+) - Clone the repository from link.
 - Navigate to root of your application and run:
  `$ git checkout ft-store-attendant-can-get-a-single-sale-order-161203404 ` to switch to this branch. 
 - Create a virtual environment
