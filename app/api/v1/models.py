@@ -25,4 +25,4 @@ class UsersModel:
         # We will automatically generate the new id
         self.id = 0
         self.email = email
-        self.message = password
+        self.password = password
