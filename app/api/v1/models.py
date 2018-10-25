@@ -11,7 +11,7 @@ class ProductsModel:
 class SalesModel:
     def __init__(self, product_name, attendant_name, customer_name, cost, quantity, creation_date):
         # We will automatically generate the new oder_id
-        self.oder_id = 0
+        self.id = 0
         self.product_name = product_name
         self.creation_date = creation_date
         self.attendant_name = attendant_name
