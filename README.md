@@ -1,4 +1,7 @@
 # StoreManager - API
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e58262b320d743418f09de2743b35ac0)](https://app.codacy.com/app/owezzy/StoreManager?utm_source=github.com&utm_medium=referral&utm_content=owezzy/StoreManager&utm_campaign=Badge_Grade_Dashboard)
+
 Store Manager is a web application that helps store owners manage sales and product inventory
 records. This application is meant for use in a single store.
 
