@@ -1,4 +1,3 @@
-from flask import jsonify
 from flask_restful import abort, fields, marshal_with, reqparse, Resource
 from datetime import datetime
 from app.api.v1.models import ProductsModel, SalesModel
@@ -45,7 +44,7 @@ product_fields = {
 
 # product custom validation
 
-def input_validate(value, name):
+def input_validate(value):
     if isinstance(value, int):
         raise ValueError("The parameter cannot be a number")
     elif value == "":
@@ -96,9 +95,6 @@ class ProductList(Resource):
         )
         product_manager.add_product(product)
         return product, 201
-
-
-"""sales resource"""
 
 
 # sales manager object
