@@ -1,3 +1,4 @@
+from flask import jsonify
 from flask_restful import abort, fields, marshal_with, reqparse, Resource
 from datetime import datetime
 from app.api.v1.models import ProductsModel, SalesModel
@@ -19,7 +20,7 @@ class ProductManager:
     def __init__(self):
         self.products = {}
 
-    # adds a product to the list of products
+    # adds a product to a list of products
     def add_product(self, product):
         self.__class__.last_id += 1
         product.id = self.__class__.last_id
@@ -39,16 +40,16 @@ product_fields = {
     'price': fields.Integer,
     'stock': fields.Integer,
     'creation_date': fields.DateTime
-
 }
 
 
 # product custom validation
+
 def input_validate(value, name):
     if isinstance(value, int):
-        raise ValueError("The parameter '{}' cannot be a number value: {}".format(name, value))
+        raise ValueError("The parameter cannot be a number")
     elif value == "":
-        raise ValueError("The parameter '{}' cannot be a empty value: {}".format(name, value))
+        raise ValueError("The parameter cannot be a empty value")
     else:
         return value
 
@@ -91,7 +92,7 @@ class ProductList(Resource):
             product_name=args['product_name'],
             price=args['price'],
             stock=args['stock'],
-            creation_date=local_timezone_time_stamp()
+            creation_date=local_timezone_time_stamp(),
         )
         product_manager.add_product(product)
         return product, 201

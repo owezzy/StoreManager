@@ -1,12 +1,11 @@
 language: python
-python:
- -"3.6.6"
+python: 3.6-dev
 install:
   - pip install -r requirements.txt
-  - pip install coverall
+  - pip install coveralls
 
 # command to run tests
 script:
-  - py.test --cov=app -v
+  - python -m pytest --cov=app/tests/v1
 after_success:
 - coveralls
