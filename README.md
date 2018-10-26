@@ -43,7 +43,11 @@ records. This application is meant for use in a single store.
 
 ## RUN TEST
 To run the tests, in your terminal from the root folder run
-``` $ pytest ```
+<<<<<<< Updated upstream
+
+=======
+  `$ python -m pytest --cov=app/tests/v1` 
+>>>>>>> Stashed changes
 
 ## Built With
 
