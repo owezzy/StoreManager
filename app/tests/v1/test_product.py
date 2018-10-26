@@ -1,6 +1,5 @@
 import unittest
 import json
-import sys
 
 from app.app import create_app
 

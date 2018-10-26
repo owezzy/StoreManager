@@ -11,10 +11,7 @@ class Config(object):
     SECRET_KEY = os.getenv("SECRET_KEY", "kalongo")
     DATABASE_URL = os.getenv("DATABASE_URL")
 
-
-"""
     "dbname='storeManager' host='localhost' port='5432' user='owen' password='abc@123'"
-"""
 
 
 class DevelopmentConfig(Config):
