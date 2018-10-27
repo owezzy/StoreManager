@@ -60,7 +60,7 @@ class PostProduct(Resource):
         if check_product_name != False:
             return make_response(jsonify({'message': 'Product Name already Exits'}), 400)
 
-        # parse instance data to model
+        # parse instance data to product model
         product = ProductsModel(
             product_name=product_name,
             price=price,
