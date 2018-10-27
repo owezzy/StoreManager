@@ -1,4 +1,5 @@
-from flask_restful import reqparse, Resource, abort
+from flask import make_response, jsonify
+from flask_restful import reqparse, Resource
 from app.api.v1.models import ProductsModel, SalesModel
 
 
@@ -40,13 +41,21 @@ class PostProduct(Resource):
         parser.add_argument('price', type=int, required=True, help='can be a number only!')
         parser.add_argument('stock', type=int, required=True, help='Please specify a figure!')
 
+        # strip white space
         args = parser.parse_args()
-        product_name = args.get('product_name')
+        product_name = args.get('product_name').strip()
         price = args.get('price')
         stock = args.get('stock')
 
-        # check if product_name exits
+        # validation error
+        if not product_name:
+            return make_response(jsonify({'message': 'product_name can not be empty'}), 400)
+        if not price:
+            return make_response(jsonify({'message': 'please specify product Price!'}), 400)
+        if not stock:
+            return make_response(jsonify({'message': 'please specify product Price!'}), 400)
 
+        # check if product_name exits
         check_product_name = ProductsModel.check_product_name(product_name)
         if check_product_name != False:
             return {'message': 'Product Name already Exits'}
@@ -115,11 +124,22 @@ class PostOrder(Resource):
             'quantity', type=int, required=True, help='Please specify the quantity!')
 
         args = parser.parse_args()
-        product_name = args.get('product_name')
-        customer_name = args.get('customer_name')
-        attendant_name = args.get('attendant_name')
+        product_name = args.get('product_name').strip()
+        customer_name = args.get('customer_name').strip()
+        attendant_name = args.get('attendant_name').strip()
         cost = args.get('cost')
         quantity = args.get('quantity')
+        # validation error
+        if not product_name:
+            return make_response(jsonify({'message': 'product_name can not be empty'}), 400)
+        if not customer_name:
+            return make_response(jsonify({'message': 'please specify customer name!'}), 400)
+        if not attendant_name:
+            return make_response(jsonify({'message': 'please specify attendant name!'}), 400)
+        if not cost:
+            return make_response(jsonify({'message': 'please specify cost of product!'}), 400)
+        if not quantity:
+            return make_response(jsonify({'message': 'please specify quantity!'}), 400)
 
         new_order = SalesModel(
             product_name=product_name,
