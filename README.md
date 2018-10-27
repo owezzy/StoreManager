@@ -8,7 +8,7 @@
 Store Manager is a web application that helps store owners manage sales and product inventory
 records. This application is meant for use in a single store.
 
-##Running a local copy of the Application
+## Running a local copy of the Application
 - [Here](https://github.com/owezzy/StoreManager.git) - Clone the repository from link.
 
 - Navigate to root of your application and run:
