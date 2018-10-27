@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/owezzy/StoreManager.svg?branch=develop)](https://travis-ci.org/owezzy/StoreManager)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d8e04cb04dc6460d7e89/maintainability)](https://codeclimate.com/github/owezzy/StoreManager/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/owezzy/StoreManager/badge.svg?branch=ch-test-api-endpoints-161203421)](https://coveralls.io/github/owezzy/StoreManager?branch=ch-test-api-endpoints-161203421)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e58262b320d743418f09de2743b35ac0)](https://app.codacy.com/app/owezzy/StoreManager?utm_source=github.com&utm_medium=referral&utm_content=owezzy/StoreManager&utm_campaign=Badge_Grade_Dashboard)
