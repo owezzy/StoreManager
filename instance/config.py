@@ -8,7 +8,7 @@ class Config(object):
     """Parent configuration class."""
     DEBUG = False
     CSRF_ENABLED = True
-    SECRET_KEY = os.getenv("SECRET_KEY", "owezzy")
+    SECRET_KEY = os.getenv("SECRET_KEY", "kalongo")
     DATABASE_URL = os.getenv("DATABASE_URL")
 
     "dbname='storeManager' host='localhost' port='5432' user='owen' password='abc@123'"
