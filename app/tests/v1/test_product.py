@@ -1,6 +1,5 @@
 import unittest
 import json
-import sys
 
 from app.app import create_app
 
@@ -20,11 +19,7 @@ class TestProduct(unittest.TestCase):
             stock=2,
             price=3000
         ))
-        self.missing_product_name = json.dumps(dict(
-            product_name="",
-            stock=2,
-            price=3000
-        ))
+
 
     def test_add_product(self):
         """Test for post product"""
