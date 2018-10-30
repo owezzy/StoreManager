@@ -1,5 +1,8 @@
+from werkzeug.security import check_password_hash, generate_password_hash
+
 products = []
 orders = []
+users = []
 
 
 class ProductsModel:
@@ -59,9 +62,30 @@ class SalesModel:
         return next((item for item in products if item["id"] == order_id), False)
 
 
-class UsersModel:
-    def __init__(self, email, password):
-        # We will automatically generate the new id
-        self.id = 0
-        self.email = email
-        self.password = password
+class User:
+
+    @staticmethod
+    def create_new_user(username, email, password):
+        role = 'user'
+        user_id = len(users) + 1
+        new_user = {'id': user_id, 'username': username, 'email': email, 'password': password, 'role': role}
+        users.append(new_user)
+
+    @staticmethod
+    def find_by_username(username):
+        return next((user for user in users if user["username"] == username), False)
+
+    @staticmethod
+    def find_by_email_address(email):
+        return next((user for user in users if user["email"] == email), False)
+
+    @staticmethod
+    def generate_password_hash(raw_password):
+        return generate_password_hash(raw_password)
+
+    @staticmethod
+    def verify_hash(password, email):
+        user = next((u for u in users if u["email"] == email), False)
+        if user == False: # try if not user later
+            return False
+        return check_password_hash(password, user['password'])
