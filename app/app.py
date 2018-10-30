@@ -1,5 +1,5 @@
 from flask import Flask
-from instance.config import app_config
+from config import app_config
 from flask_jwt_extended import JWTManager
 
 
