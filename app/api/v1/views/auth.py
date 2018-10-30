@@ -99,7 +99,9 @@ class UserLogin(Resource):
         if current_user == False:
             return {'message': 'email {} does not exist'.format(email)}, 400
         db_password = current_user['password']
-        return User.check_hash(password, db_password)
+        pass_verify = User.check_hash(password, db_password)
+        if pass_verify != True:
+            return {'message':'Password doesnt match'}, 400
         access_token = create_access_token(identity=email)
         refresh_token = create_refresh_token(identity=email)
         return {
