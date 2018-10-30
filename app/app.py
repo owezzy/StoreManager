@@ -2,6 +2,7 @@ from flask import Flask
 from instance.config import app_config
 from flask_jwt_extended import JWTManager
 
+
 def create_app(config):
     """ creates a flask instance according to config passed """
     app = Flask(__name__)
