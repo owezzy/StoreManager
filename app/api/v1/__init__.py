@@ -1,8 +1,10 @@
 from flask_restful import Api
 from flask import Flask, Blueprint
 
-from app.api.v1.views import PostProduct, GetProduct, GetSingleProduct, PostOrder, GetOrder, GetSingleOrder, TokenRefresh
-from app.api.v1.auth import UserRegistration, UserLogin
+from app.api.v1.views.products import PostProduct, GetProduct, GetSingleProduct
+from app.api.v1.views.sales import PostOrder, GetOrder, GetSingleOrder
+from app.api.v1.models.products import ProductsModel
+from app.api.v1.views.auth import UserRegistration, UserLogin, TokenRefresh
 
 app = Flask(__name__)
 version1 = Blueprint('api', __name__, url_prefix='/api/v1')
