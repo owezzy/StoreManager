@@ -4,7 +4,7 @@ from flask import make_response, jsonify
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import create_access_token, create_refresh_token
 
-from app.api.v1.models import User
+from app.api.v1 import User
 
 
 class UserRegistration(Resource):
@@ -82,7 +82,6 @@ class UserLogin(Resource):
 
     # login function
     def post(self):
-
         # clean data first
         args = UserLogin.parser.parse_args()
         password = args.get('password').strip()
@@ -91,22 +90,22 @@ class UserLogin(Resource):
             return {'message': 'Email field can not be empty'}, 400
         if not password:
             return {'message': 'Password field cannot be empty'}, 400
-
-            # upon successful validation of user by the email
+        # upon successful validation of user by the email
         current_user = User.find_by_email_address(email)
         if current_user == False:
             return {'message': 'email {} does not exist'.format(email)}, 400
+        db_password = current_user['password']
 
-            # compare user's password vs hashed password
-        if User.verify_hash(password, email) == True:
+        # compare user's password vs hashed password
+        if User.check_hash(db_password, password) == True:
             access_token = create_access_token(identity=email)
             refresh_token = create_refresh_token(identity=email)
 
-            return {
-                       'message': 'User Login successful',
-                       'status': 'ok',
-                       'access_token': access_token,
-                       'refresh_token': refresh_token
-                   }, 200
-        else:
-            return {'message': 'Wrong credentials'}, 400
+        return {
+                   'message': 'User Login successful',
+                   'status': 'ok',
+                   'access_token': access_token,
+                   'refresh_token': refresh_token
+               }, 200
+        # else:
+        #     return {'message': 'Wrong credentials'}, 400
