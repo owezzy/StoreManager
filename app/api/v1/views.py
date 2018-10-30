@@ -1,27 +1,27 @@
 from flask import make_response, jsonify
 from flask_restful import reqparse, Resource
+from flask_jwt_extended import jwt_required, jwt_refresh_token_required, get_jwt_identity, create_access_token
+
 from app.api.v1.models import ProductsModel, SalesModel
 
 
 # object to define product resource
 class GetProduct(Resource):
 
-    @staticmethod
-    def get():
+    @jwt_required
+    def get(self):
         all_products = ProductsModel.get_all_product()
         return {
                    'message': 'All Products retrieved successfully',
                    'status': 'ok',
-                   # 'access_token': access_token,
-                   # 'refresh_token': refresh_token,
                    'product': all_products
                }, 200
 
 
 class GetSingleProduct(Resource):
     # retrieve a single product
-    @staticmethod
-    def get(product_id):
+    @jwt_required
+    def get(self, product_id):
         single_product = ProductsModel.get_product(product_id)
         return {
                    'message': 'Product retrieved successfully',
@@ -34,8 +34,9 @@ class GetSingleProduct(Resource):
 
 # object which holds the product list
 class PostProduct(Resource):
-    @staticmethod
-    def post():
+
+    @jwt_required
+    def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('product_name', type=str, required=True)
         parser.add_argument('price', type=int, required=True, help='can be a number only!')
@@ -58,7 +59,7 @@ class PostProduct(Resource):
         # check if product_name exits
         check_product_name = ProductsModel.check_product_name(product_name)
         if check_product_name != False:
-            return {'message': 'Product Name already Exits'}
+            return make_response(jsonify({'message': 'Product Name already Exits'}), 400)
 
         # parse instance data to model
         product = ProductsModel(
@@ -83,28 +84,24 @@ class PostProduct(Resource):
 
 # Oder object to hold sales detail
 class GetOrder(Resource):
-    @staticmethod
-    def get():
+    @jwt_required
+    def get(self):
         all_orders = SalesModel.get_all_orders()
         return {
                    'message': 'All Orders retrieved successfully',
                    'status': 'ok',
-                   # 'access_token': access_token,
-                   # 'refresh_token': refresh_token,
                    'product': all_orders
                }, 200
 
 
 class GetSingleOrder(Resource):
     # fetch a single order
-    @staticmethod
-    def get(order_id):
+    @jwt_required
+    def get(self, order_id):
         single_order = SalesModel.get_order(order_id)
         return {
                    'message': 'Order retrieved successfully',
                    'status': 'ok',
-                   # 'access_token': access_token,
-                   # 'refresh_token': refresh_token,
                    'product': single_order
                }, 200
 
@@ -112,8 +109,8 @@ class GetSingleOrder(Resource):
 # OrderList object to store the sales order object
 class PostOrder(Resource):
     # add a single sales order to list
-    @staticmethod
-    def post():
+    @jwt_required
+    def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('product_name', type=str, required=True)
         parser.add_argument('customer_name', type=str, required=True)
@@ -153,10 +150,17 @@ class PostOrder(Resource):
             return {
                        'message': 'Order was created successfully',
                        'status': 'CREATED',
-                       # 'access_token': access_token,
-                       # 'refresh_token': refresh_token,
                        'order': result
                    }, 201
         except Exception as er:
             print(er)
             return {'message': 'Something went wrong'}, 500
+
+
+# token refresh object
+class TokenRefresh(Resource):
+    @jwt_refresh_token_required
+    def post(self):
+        current_user = get_jwt_identity()
+        access_token = create_access_token(identity=current_user)
+        return {'access_token': access_token}
