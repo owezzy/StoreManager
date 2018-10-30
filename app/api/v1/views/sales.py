@@ -1,7 +1,7 @@
 from flask import make_response, jsonify
 from flask_restful import reqparse, Resource
 from flask_jwt_extended import jwt_required
-from app.api.v1.models import SalesModel
+from app.api.v1.models.sales import SalesModel
 
 
 # Oder object to hold sales detail

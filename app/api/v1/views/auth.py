@@ -2,9 +2,9 @@ import re
 
 from flask import make_response, jsonify
 from flask_restful import Resource, reqparse
-from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import create_access_token, create_refresh_token, jwt_refresh_token_required, get_jwt_identity
 
-from app.api.v1 import User
+from app.api.v1.models.users import User
 
 
 class UserRegistration(Resource):
@@ -54,16 +54,20 @@ class UserRegistration(Resource):
             return {'message': 'Email already registered'}, 400
 
         password = User.generate_password_hash(raw_password)
+        current_user = User(
+            username=username,
+            password=password,
+            email=email
+        )
 
         # save user instance to model
         try:
-            result = User.create_new_user(username, email, password)
+            result = User.create_new_user(current_user)
             access_token = create_access_token(identity=username)
             refresh_token = create_refresh_token(identity=username)
 
             return {
                        'message': 'User created successfully.',
-                       'status': 'Ok.',
                        'access_token': access_token,
                        'refresh_token': refresh_token,
                        'user': result
@@ -95,17 +99,21 @@ class UserLogin(Resource):
         if current_user == False:
             return {'message': 'email {} does not exist'.format(email)}, 400
         db_password = current_user['password']
-
-        # compare user's password vs hashed password
-        if User.check_hash(db_password, password) == True:
-            access_token = create_access_token(identity=email)
-            refresh_token = create_refresh_token(identity=email)
-
+        return User.check_hash(password, db_password)
+        access_token = create_access_token(identity=email)
+        refresh_token = create_refresh_token(identity=email)
         return {
                    'message': 'User Login successful',
                    'status': 'ok',
                    'access_token': access_token,
                    'refresh_token': refresh_token
                }, 200
-        # else:
-        #     return {'message': 'Wrong credentials'}, 400
+
+
+# token refresh object
+class TokenRefresh(Resource):
+    @jwt_refresh_token_required
+    def post(self):
+        current_user = get_jwt_identity()
+        access_token = create_access_token(identity=current_user)
+        return {'access_token': access_token}
