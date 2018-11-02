@@ -2,3 +2,5 @@
 venv/
 __pycache__/
 .cpython-36.pyc
+.env
+config
