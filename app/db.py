@@ -1,22 +1,22 @@
 import os
 import psycopg2
-from psycopg2 import connect
+from psycopg2 import connect, extras
 
-environment = os.environ['APP_SETTINGS']
+environment = os.getenv('APP_SETTINGS')
 if environment == 'testing':
-    connect = connect(os.getenv('DATABASE_TEST_URL'))
-    connect.autocommit = False
-    cur = connect.cursor()
+    conn = connect(os.getenv('DATABASE_TEST_URL'))
+    conn.autocommit = False
+    cur = conn.cursor()
     # print('connect to test database')
 if environment == 'development':
-    connect = connect(os.getenv('DATABASE_URL'))
-    connect.autocommit = False
-    cur = connect.cursor()
-    # print('connected to development database')
+    conn = connect(os.getenv('DATABASE_URL'))
+    conn.autocommit = False
+    cur = conn.cursor()
+    # 'connected to development database')
 if environment == 'production':
-    connect = connect(os.getenv('DATABASE_URL'))
-    connect.autocommit = False
-    cur = connect.cursor()
+    conn = connect(os.getenv('DATABASE_URL'))
+    conn.autocommit = False
+    cur = conn.cursor()
     # print('connected to production database')
 
 
@@ -31,7 +31,7 @@ def create_tables():
                 " email VARCHAR(64) UNIQUE NOT NULL,password VARCHAR(256) NOT NULL);"
 
         # admin data
-        create_admin = """INSERT INTO users (username, email, password) 
+        create_admin = """INSERT INTO users (username, email, password)
                  VALUES ('admin','owezzygold@gmail.com',
                  '$pbkdf2-sha256$29000$qBUihNAaozTmXIvRGuN8bw$oMzLAzVT7gATROl7KkzvemH6cAx6Jx/0TLOjQdDXlz8')"""
 

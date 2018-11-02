@@ -15,8 +15,8 @@ def create_app(config_name):
 
     # registered JWT manager
     app.config['JWT_SECRET_KEY'] = 'owezzy'
-    app.config['JWT_BLACKLIST_ENABLED'] = True
-    app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
+    # app.config['JWT_BLACKLIST_ENABLED'] = True
+    # app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
     jwt = JWTManager(app)
 
     create_tables()
