@@ -1,4 +1,4 @@
-import psycopg2
+from psycopg2 import Error
 from app.db import cur
 
 
@@ -18,8 +18,8 @@ class ProductsModel:
                 values (%s, %s, %s, %s, %s, %s)""",
                 (self.product_name, self.price, self.stock, self.minimum_stock, self.owner))
             cur.commit()
-            return 'product created successfully'
-        except (Exception, psycopg2.Error) as er:
+            return 'created product successfully'
+        except (Exception, Error) as er:
             return {'message': 'Something went wrong',
                     'error': er}, 500
 
@@ -29,7 +29,7 @@ class ProductsModel:
             cur.execute("""SELECT * FROM products """)
             rows = cur.fetchall()
             return rows
-        except (Exception, psycopg2.Error) as er:
+        except (Exception, Error) as er:
             return {'message': 'Something went wrong',
                     'error': er}, 500
 
@@ -43,7 +43,7 @@ class ProductsModel:
                 return False
             return rows
 
-        except (Exception, psycopg2.Error) as e:
+        except (Exception, Error) as e:
             return {'message': 'Something went wrong',
                     'error': e}, 500
 

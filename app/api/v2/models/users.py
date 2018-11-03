@@ -1,13 +1,7 @@
-import psycopg2
-
 from passlib.hash import pbkdf2_sha256 as sha256
-from psycopg2 import sql, extras, Error
+from psycopg2 import Error
 
-
-from app.db import connect
-
-# users = []
-curr = connect.cursor(cursor_factory=extras.RealDictConnection)
+from app.db import cur
 
 
 class User:
@@ -20,11 +14,11 @@ class User:
 
     def create_new_user(self):
         try:
-            curr.execute(
+            cur.execute(
                 """INSERT INTO users (username, email, password)
                    VALUES ('%s','%s','%s')""",
                 (self.username, self.email, self.password))
-            connect.commit()
+            cur.commit()
             return 'new_user registered successfully'
         except Exception as er:
             print(er)
@@ -34,30 +28,30 @@ class User:
     @staticmethod
     def find_by_id(user_id):
 
-        curr.execute("""SELECT * FROM users WHERE id='{}' """.format(user_id))
-        rows = curr.fetchone()
+        cur.execute("""SELECT * FROM users WHERE id='{}' """.format(user_id))
+        rows = cur.fetchone()
         if rows:
             return True
         return False
 
     @staticmethod
     def find_by_username(username):
-        curr.execute("""SELECT * FROM users WHERE username='{}' """.format(username))
-        rows = curr.fetchone()
+        cur.execute("""SELECT * FROM users WHERE username='{}' """.format(username))
+        rows = cur.fetchone()
         return rows
 
     @staticmethod
-    def find_by_email_address(email):
-        curr.execute("""SELECT * FROM users WHERE email='{}' """.format(email))
-        rows = curr.fetchone()
+    def find_by_email(email):
+        cur.execute("""SELECT * FROM users WHERE email='{}' """.format(email))
+        rows = cur.fetchone()
         return rows
 
     # checks if user is admin
     @staticmethod
     def is_admin(username):
 
-        curr.execute("""SELECT * FROM users WHERE username='{}' """.format(username))
-        rows = curr.fetchone()
+        cur.execute("""SELECT * FROM users WHERE username='{}' """.format(username))
+        rows = cur.fetchone()
         if rows:
             if rows["role"] == 1:
                 return True
@@ -68,10 +62,10 @@ class User:
     def make_admin(username):
         role = 1
         try:
-            curr.execute("""UPDATE users  SET role='{}'  WHERE id='{}' """.format(role, username))
-            connect.commit()
+            cur.execute("""UPDATE users  SET role='{}'  WHERE id='{}' """.format(role, username))
+            cur.commit()
             return 'Store attendant authorized as Admin'
-        except (Exception, psycopg2.Error) as e:
+        except (Exception, Error) as e:
             print(e)
             return {'message': 'Something went wrong'}, 500
 
@@ -81,5 +75,3 @@ class User:
 
     def check_hash(password, hash):
         return sha256.verify(password, hash)
-
-    connect.commit()
