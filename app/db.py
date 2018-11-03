@@ -1,22 +1,23 @@
 import os
-import psycopg2
-from psycopg2 import connect, extras
+from psycopg2 import connect, Error, extras
 
 environment = os.getenv('APP_SETTINGS')
 if environment == 'testing':
-    conn = connect(os.getenv('DATABASE_TEST_URL'))
-    conn.autocommit = False
-    cur = conn.cursor()
+    connect = connect(os.getenv('DATABASE_TEST_URL'))
+    cur = connect.cursor()
     # print('connect to test database')
+
 if environment == 'development':
-    conn = connect(os.getenv('DATABASE_URL'))
-    conn.autocommit = False
-    cur = conn.cursor()
-    # 'connected to development database')
+    connect = connect(os.getenv('DATABASE_URL'))
+    connect.autocommit = False
+    cur = connect.cursor(cursor_factory=extras.RealDictCursor)
+    print('connected to development database')
+
 if environment == 'production':
-    conn = connect(os.getenv('DATABASE_URL'))
-    conn.autocommit = False
-    cur = conn.cursor()
+    connect = connect(os.getenv('DATABASE_URL'))
+    connect.autocommit = False
+    cur = connect.cursor(cursor_factory=extras.RealDictCursor)
+    # cur = conn.cursor(cursor_factory=extras.RealDictCursor)
     # print('connected to production database')
 
 
@@ -28,12 +29,12 @@ def create_tables():
 
         # create table users
         users = "CREATE TABLE users (id serial PRIMARY KEY NOT NULL ,username VARCHAR(64) UNIQUE NOT NULL," \
-                " email VARCHAR(64) UNIQUE NOT NULL,password VARCHAR(256) NOT NULL);"
+                " email VARCHAR(64) UNIQUE NOT NULL,password VARCHAR(256) NOT NULL, role int default 0);"
 
         # admin data
-        create_admin = """INSERT INTO users (username, email, password)
+        create_admin = """INSERT INTO users (username, email, password, role)
                  VALUES ('admin','owezzygold@gmail.com',
-                 '$pbkdf2-sha256$29000$qBUihNAaozTmXIvRGuN8bw$oMzLAzVT7gATROl7KkzvemH6cAx6Jx/0TLOjQdDXlz8')"""
+                 '$pbkdf2-sha256$29000$qBUihNAaozTmXIvRGuN8bw$oMzLAzVT7gATROl7KkzvemH6cAx6Jx/0TLOjQdDXlz8',1)"""
 
         # create table tokens
         tokens = "CREATE TABLE tokens(id VARCHAR(256) PRIMARY KEY, expired_tokens VARCHAR(256));"
@@ -55,8 +56,7 @@ def create_tables():
         cur.execute(products)
         cur.execute(sales)
         connect.commit()
-
-    except (Exception, psycopg2.Error) as er:
+    except (Exception, Error) as er:
         print('Error creating table', er)
 
 
