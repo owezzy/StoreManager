@@ -1,5 +1,5 @@
 import unittest
-import jso
+import json
 
 from app.app import create_app
 
