@@ -45,7 +45,7 @@ records. This application is meant for use in a single store.
 
 ## RUN TEST
 To run the tests, in your terminal from the root folder run
- `pytest cov`
+ `python -m pytest --cov=app/tests/v2`
 
 
 ## Built With
