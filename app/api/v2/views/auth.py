@@ -6,7 +6,7 @@ from flask_restful import Resource, reqparse
 from flask_jwt_extended import create_access_token, jwt_refresh_token_required, get_jwt_identity, jwt_required
 from functools import wraps
 
-from app.api.v1.models.users import User
+from app.api.v2.models.users import User
 
 
 def admin_only(v):
@@ -15,7 +15,7 @@ def admin_only(v):
     @wraps(v)
     def decorator_function(*args, **kwargs):
         user_name = get_jwt_identity()
-        user = User.find_by_email_address(user_name)
+        user = User.find_by_email(user_name)
         if user['role'] != 1:
             return {'message': 'Only admin allowed Here'}, 401
         return v(*args, **kwargs)
@@ -59,8 +59,8 @@ class UserRegistration(Resource):
                                  400)
 
         # on successful validation
-        current_user = User.find_by_email_address(email)
-        if current_user != False:
+        current_user = User.find_by_email(email)
+        if current_user is not None:
             return {'message': 'Email already registered'}, 400
 
         password = User.generate_password_hash(raw_password)
@@ -71,7 +71,6 @@ class UserRegistration(Resource):
         )
 
         # save user instance to model
-
         result = User.create_new_user(current_user)
         return {
                    'message': 'User created successfully.',
@@ -96,7 +95,7 @@ class UserLogin(Resource):
         if not password:
             return {'message': 'Password field cannot be empty'}, 400
         # upon successful validation of user by the email
-        current_user = User.find_by_email_address(email)
+        current_user = User.find_by_email(email)
         if not current_user:
             return {'message': 'email {} does not exist'.format(email)}, 400
         db_password = current_user['password']
