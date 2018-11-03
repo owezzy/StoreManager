@@ -11,13 +11,12 @@ if environment == 'development':
     connect = connect(os.getenv('DATABASE_URL'))
     connect.autocommit = False
     cur = connect.cursor(cursor_factory=extras.RealDictCursor)
-    print('connected to development database')
+    #print('connected to development database')
 
 if environment == 'production':
     connect = connect(os.getenv('DATABASE_URL'))
     connect.autocommit = False
     cur = connect.cursor(cursor_factory=extras.RealDictCursor)
-    # cur = conn.cursor(cursor_factory=extras.RealDictCursor)
     # print('connected to production database')
 
 
