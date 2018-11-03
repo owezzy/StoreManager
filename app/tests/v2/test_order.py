@@ -3,9 +3,9 @@ import json
 
 from app.app import create_app
 
-POST_ORDER = '/api/v1/sales'
-GET_A_SINGLE_ORDER = '/api/v1/sales/1'
-GET_ALL_ORDER = '/api/v1/sales'
+POST_ORDER = '/api/v2/sales'
+GET_A_SINGLE_ORDER = '/api/v2/sales/1'
+GET_ALL_ORDER = '/api/v2/sales'
 
 
 class TestOrder(unittest.TestCase):
