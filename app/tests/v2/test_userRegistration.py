@@ -5,7 +5,6 @@ from psycopg2 import connect, extras
 from app.app import create_app
 from app.db import create_tables, delete_table
 
-
 REGISTRATION_URL = '/api/v2/registration/'
 LOGIN_URL = '/api/v2/login/'
 
@@ -32,7 +31,7 @@ class UserRegistrationTestCase(unittest.TestCase):
 
     def test_post(self):
         res = self.client.post(REGISTRATION_URL, data=json.dumps(self.register_new_user),
-                               content_type = 'application/json')
+                               content_type='application/json')
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 201)
         self.assertEqual(response_data['message'], 'User created successfully.')
@@ -60,4 +59,3 @@ class UserRegistrationTestCase(unittest.TestCase):
                                content_type='application/json')
         resp_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 400)
-
