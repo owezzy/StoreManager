@@ -9,16 +9,15 @@ from functools import wraps
 from app.api.v2.models.users import User
 
 
-def admin_only(v):
+def admin_only(admin):
     """Deny access to admin pages"""
-
-    @wraps(v)
+    @wraps(admin)
     def decorator_function(*args, **kwargs):
-        user_name = get_jwt_identity()
-        user = User.find_by_email(user_name)
+        email = get_jwt_identity()
+        user = User.find_by_email(email)
         if user['role'] != 1:
             return {'message': 'Only admin allowed Here'}, 401
-        return v(*args, **kwargs)
+        return admin(*args, **kwargs)
 
     return decorator_function
 
@@ -38,7 +37,6 @@ class UserRegistration(Resource):
         username = args.get('username').strip()
         email = args.get('email')
         raw_password = args.get('password')
-        unique_name = get_jwt_identity()
 
         # validate user data input
         email_validation = re.compile(r"(^[a-zA-Z0-9_.-]+@[a-zA-Z-]+\.[.a-zA-Z-]+$)")
@@ -59,19 +57,19 @@ class UserRegistration(Resource):
                                  400)
 
         # on successful validation
-        current_user = User.find_by_email(email)
-        if current_user is not None:
+        unique_name = User.find_by_email(email)
+        if unique_name is not None:
             return {'message': 'Email already registered'}, 400
 
         password = User.generate_password_hash(raw_password)
-        current_user = User(
+        new_user = User(
             username=username,
             password=password,
             email=email
         )
 
         # save user instance to model
-        result = User.create_new_user(current_user)
+        result = User.create_new_user(new_user)
         return {
                    'message': 'User created successfully.',
                    'user': result
@@ -106,7 +104,7 @@ class UserLogin(Resource):
         return {
                    'message': 'User Login successful',
                    'status': 'ok',
-                   'username': current_user['email'],
+                   'username': current_user['username'],
                    'access_token': access_token,
                }, 200
 
