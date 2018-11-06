@@ -1,7 +1,6 @@
 from passlib.hash import pbkdf2_sha256 as sha256
-from psycopg2 import Error
 
-from app.db import cur
+from app.db import cur, connection, Error
 
 
 class User:
@@ -15,12 +14,12 @@ class User:
     def create_new_user(self):
         try:
             cur.execute(
-                """INSERT INTO users (username, email, password)
-                   VALUES ('%s','%s','%s')""",
-                (self.username, self.email, self.password))
-            cur.commit()
+                """INSERT INTO users (username, email, password, role)
+                   VALUES (%s,%s,%s, %s)""",
+                (self.username, self.email, self.password, self.role))
+            connection.commit()
             return 'new_user registered successfully'
-        except Exception as er:
+        except (Exception, Error) as er:
             print(er)
             return 'Registration Failed'
 
@@ -63,7 +62,7 @@ class User:
         role = 1
         try:
             cur.execute("""UPDATE users  SET role='{}'  WHERE id='{}' """.format(role, username))
-            cur.commit()
+            connection.commit()
             return 'Store attendant authorized as Admin'
         except (Exception, Error) as e:
             print(e)
