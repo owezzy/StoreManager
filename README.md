@@ -35,16 +35,17 @@ records. This application is meant for use in a single store.
  
 | Methods | Url                                            |      Description         |
 | -------:|:----------------------------------------------:|-------------------------:|
-| POST    | http://127.0.0.1:5000/api/v1/products          |   create a product       | 
-| POST    | http://127.0.0.1:5000/api/v1/sales             |  create a sale record    | 
-| GET     | http://127.0.0.1:5000/api/v1/products          |  Fetch all product       |       
-| GET     | http://127.0.0.1:5000/api/v1/sales             |  Fetch all sales         |      
-| GET     | http://127.0.0.1:5000/api/v1/product/<int: id> |  Fetches a single product|
-| GET     | http://127.0.0.1:5000/api/v1/sale/<int: id>    |  Fetches a single sale   |
+| POST    | http://127.0.0.1:5000/api/v2/products          |   create a product       | 
+| POST    | http://127.0.0.1:5000/api/v2/sales             |  create a sale record    | 
+| GET     | http://127.0.0.1:5000/api/v2/products          |  Fetch all product       |       
+| GET     | http://127.0.0.1:5000/api/v2/sales             |  Fetch all sales         |      
+| GET     | http://127.0.0.1:5000/api/v2/product/<int: id> |  Fetches a single product|
+| GET     | http://127.0.0.1:5000/api/v2/sale/<int: id>    |  Fetches a single sale   |
+
 
 ## RUN TEST
 To run the tests, in your terminal from the root folder run
-
+ `python -m pytest --cov=app/tests/v2`
 
 
 ## Built With

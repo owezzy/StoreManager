@@ -6,6 +6,6 @@ install:
 
 # command to run tests
 script:
-  - python -m pytest --cov=app/tests/v1
+  - python -m pytest --cov=app/tests/v2
 after_success:
 - coveralls
